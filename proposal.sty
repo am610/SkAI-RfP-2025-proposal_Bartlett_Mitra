@@ -1,0 +1,229 @@
+\pagenumbering{}
+% \usepackage{xcolor}
+
+% First, identifying information about this style file.
+
+\def\revtex@ver{0.1}		% Version number of this file.
+\def\revtex@date{01 Sep 2022}	% Revision date.
+\def\revtex@author{Chadd Myers}	% This file's author.
+\def\revtex@org{NOIRLab}		% Sponsoring organization.
+\def\revtex@genre{observing proposal}	% Document "type".
+\def\revtex@editor{Adam Miller} % Editor for SkAI
+\def\revtex@editor{Tjitske Starkenburg} % Editor for SkAI
+% \ifundefined sequence
+\def\ifundefined#1{\expandafter\ifx\csname#1\endcsname\relax}
+
+
+% \let\ltx@enddoc=\enddocument
+% \def\enddocument{\vfill\revtex@pageid\ltx@enddoc}
+
+% Page design/layout macros.  Page sizes are at the end of the file.
+
+\def\baselinestretch{0.98}	% Tighten up baselines a little.
+
+\def\ps@kpprophead{\def\@oddfoot{}\def\@evenfoot{}
+    \def\@oddhead{\hbox to\textwidth{\small\sl \prop@phead
+    \hfill}}\let\@evenhead\@oddhead
+    \def\chaptermark##1{\markright {{\ifnum \c@secnumdepth>\m@ne
+	\@chapapp\ \thechapter. \ \fi ##1}}}}
+
+
+\def\prop@idbox{ \ifx\@empty\@propid{
+	\hfill\phantom{\framebox[1.7in][c]{\LARGE\bf/}}
+    }\else{
+	\hfill\framebox[1.7in][c]{\LARGE\bf \@propid/\@sciencecategorynum }
+    }\fi
+}
+
+\def\prop@oldidbox{ \ifx\@empty\@oldpropid{
+	\phantom{\framebox[2.2in][c]{\bf/}}
+    }\else{
+	\framebox[2.2in][c]{\bf Resubmission of \@oldpropid }
+    }\fi
+}
+
+\def\prop@info{\begin{tabbing}
+    % first line
+    \hbox to.34\textwidth{\large\bf\prop@head\hfill}%
+    \hbox to.30\textwidth{%
+	\ifx\@proposaltype\@empty{\hfill}%
+	\else{\hfill{\it \@proposaltype\ proposal}\hfill}\fi}%
+    \hbox to.36\textwidth{%
+        {\bf Panel:} \hspace{0.21in} 
+	\ifx\@panelassignment\@empty{\instruct@font For office use.}%
+	\else{\@panelassignment}\fi%
+	\hfill}%
+    \\
+
+    % second line
+    \hbox to.34\textwidth{%
+	\ifx\@rcptdate\@empty{\it Date:\/} \today%
+	\else{Date received:} \@rcptdate\fi\hfill}%
+    \hbox to.30\textwidth{%
+    	\ifx\@thesis\@thesistrue{\hfill{\it Thesis}\hfill}%
+	\else{\hfill}\fi}%
+    \hbox to.36\textwidth{{\bf Category:} \@sciencecategory\hfill}%
+\end{tabbing}}
+
+
+\def\ques@font{\it}
+\def\instruct@font{\small\sl}
+
+% Below is the markup that the team needs to supply.
+% Instructions for filling in the form using these commands are in
+% a template proposal form file as LaTeX comments.
+
+\def\prop@head{SkAI RfP 2025 Proposal}
+\def\prop@phead{\textcolor{lightgray}{Dark Energy with Symbolic Regression - Bartlett, Mitra, Raginsky  }}
+
+\def\title#1{
+    \vspace*{-6\headheight}\prop@oldidbox  \prop@idbox
+    \vspace*{0.5in}
+    \prop@info\par
+    \vspace*{0.1in}
+    \def\@savetitle{#1}\ifx\@empty\@savetitle
+    \makebox[\textwidth]{\Large{\bf TITLE:} \hrulefill}\par
+    \makebox[\textwidth]{\hrulefill}\par
+    \else{\LARGE\bf\@savetitle}\fi
+}
+    
+
+
+% \newenvironment{references}{\subsubsection*{References}}{\relax}
+% % \let\reference=\par
+
+\def\propsection{\@startsection{section}{1}{\z@}
+    {7pt plus 4pt minus 2pt}{-1em}{\normalsize\bf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}
+    {-3.25ex plus -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\bf}}
+
+\def\feas@head{{\instruct@font 
+        %~Describe your plans for mentoring junior researchers during the funding period. This section should not exceed 1 page.
+        \par}}
+
+\def\justif@head{{\instruct@font %~Discuss the significance of the proposed research to astronomy and AI. Please ensure following the text page limits, font size and layout guidelines as shared in the RfP.
+\par}}
+
+\def\ofac@head{{\instruct@font %~Describe how the team will participate in and contribute to existing or planned SkAI activities outside the funded research. Examples include: organizing workshops or meetings relevant to SkAI, mentoring summer undergraduate research students on activities aligned with the project, running a training activity or collection and curation of tutorials, substantive engagement with the SkAI satellite institutions and industry partners, or outreach and other education activities -- see the NSF proposal for an exhaustive list. $\sim$This section should be approximately half a page.
+\par}}
+
+\def\teamin@head{{\instruct@font
+    %~Describe contributions from team members that will not be directly funded by this SkAI RfP, but who have funding from other related projects. This is not intended to be a list of co-Is or their expertise. This information is requested to get a complete picture of the effort and feasibility of the project. Contributions to the project funded by other sources will not affect the likelihood to be funded by SkAI. SkAI cannot fund projects that are already funded elsewhere.\\ The text should not exceed half a page. 
+    \par}}
+
+    
+\def\researchproposal{\newpage{\protect\fbox{\textbf{Research Proposal}}}
+    \justif@head}
+\def\mentoringplan{\newpage{\protect\fbox{\textbf{Mentoring Plan}}}\feas@head}
+\def\manplan{\vfill\propsection{\protect\fbox{Management Plan}}\mplan@head}
+\def\engagement{\vspace{4em}{\protect\fbox{\textbf{SkAI Engagement Activities}}}\ofac@head}
+\def\teaminfo{\newpage{\protect\fbox{\textbf{Additional Project Personnel Funded by Other Sources}}}
+    \teamin@head}
+
+\def\relatedwork#1{\fbox{$\star$}\space#1}
+
+
+% Conveniences - compatible with AASTeX v4.0.
+
+\def\deg{\hbox{$^\circ$}}
+\def\sun{\hbox{$\odot$}}
+\def\earth{\hbox{$\oplus$}}
+\def\lesssim{\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{$<$}}}}
+\def\gtrsim{\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{$>$}}}}
+\def\sq{\hbox{\rlap{$\sqcap$}$\sqcup$}}
+\def\arcdeg{\hbox{$^\circ$}}
+\def\arcmin{\hbox{$^\prime$}}
+\def\arcsec{\hbox{$^{\prime\prime}$}}
+\def\fd{\hbox{$.\!\!^{\rm d}$}}
+\def\fh{\hbox{$.\!\!^{\rm h}$}}
+\def\fm{\hbox{$.\!\!^{\rm m}$}}
+\def\fs{\hbox{$.\!\!^{\rm s}$}}
+\def\fdg{\hbox{$.\!\!^\circ$}}
+\def\farcm{\hbox{$.\mkern-4mu^\prime$}}
+\def\farcs{\hbox{$.\!\!^{\prime\prime}$}}
+\def\fp{\hbox{$.\!\!^{\scriptscriptstyle\rm p}$}}
+\def\micron{\hbox{$\mu$m}}
+\let\la=\lesssim			% For Springer A&A compliance...
+\let\ga=\gtrsim
+\def\case#1#2{\hbox{$\frac{#1}{#2}$}}
+\def\slantfrac#1#2{\hbox{$\,^#1\!/_#2$}}
+\def\onehalf{\slantfrac{1}{2}}
+\def\onethird{\slantfrac{1}{3}}
+\def\twothirds{\slantfrac{2}{3}}
+\def\onequarter{\slantfrac{1}{4}}
+\def\threequarters{\slantfrac{3}{4}}
+\def\ubvr{\hbox{$U\!BV\!R$}}            
+\def\ub{\hbox{$U\!-\!B$}}               
+\def\bv{\hbox{$B\!-\!V$}}               
+\def\vr{\hbox{$V\!-\!R$}}               
+\def\ur{\hbox{$U\!-\!R$}}
+\def\ion#1#2{#1$\;${\small\rm\@Roman{#2}}\relax}
+
+% \let\jnl@style=\rm
+% \def\ref@jnl#1{{\jnl@style#1}}
+% \def\aj{\ref@jnl{AJ}}                   
+% \def\araa{\ref@jnl{ARA\&A}}             
+% \def\apj{\ref@jnl{ApJ}}                 
+% \def\apjl{\ref@jnl{ApJ}}                
+% \def\apjs{\ref@jnl{ApJS}}               
+% \def\ao{\ref@jnl{Appl.~Opt.}}           
+% \def\apss{\ref@jnl{Ap\&SS}}             
+% \def\aap{\ref@jnl{A\&A}}                
+% \def\aapr{\ref@jnl{A\&A~Rev.}}          
+% \def\aaps{\ref@jnl{A\&AS}}              
+% \def\azh{\ref@jnl{AZh}}                 
+% \def\baas{\ref@jnl{BAAS}}               
+% \def\jrasc{\ref@jnl{JRASC}}             
+% \def\memras{\ref@jnl{MmRAS}}            
+% \def\mnras{\ref@jnl{MNRAS}}             
+% \def\pra{\ref@jnl{Phys.~Rev.~A}}        
+% \def\prb{\ref@jnl{Phys.~Rev.~B}}        
+% \def\prc{\ref@jnl{Phys.~Rev.~C}}        
+% \def\prd{\ref@jnl{Phys.~Rev.~D}}        
+% \def\pre{\ref@jnl{Phys.~Rev.~E}}        
+% \def\prl{\ref@jnl{Phys.~Rev.~Lett.}}    
+% \def\pasp{\ref@jnl{PASP}}               
+% \def\pasj{\ref@jnl{PASJ}}               
+% \def\qjras{\ref@jnl{QJRAS}}             
+% \def\skytel{\ref@jnl{S\&T}}             
+% \def\solphys{\ref@jnl{Sol.~Phys.}}      
+% \def\sovast{\ref@jnl{Soviet~Ast.}}      
+% \def\ssr{\ref@jnl{Space~Sci.~Rev.}}     
+% \def\zap{\ref@jnl{ZAp}}                 
+% \def\nat{\ref@jnl{Nature}}              
+% \def\iaucirc{\ref@jnl{IAU~Circ.}}
+% \def\aplett{\ref@jnl{Astrophys.~Lett.}}
+% \def\apspr{\ref@jnl{Astrophys.~Space~Phys.~Res.}}
+% \def\bain{\ref@jnl{Bull.~Astron.~Inst.~Netherlands}}
+% \def\fcp{\ref@jnl{Fund.~Cosmic~Phys.}}
+% \def\gca{\ref@jnl{Geochim.~Cosmochim.~Acta}}
+% \def\grl{\ref@jnl{Geophys.~Res.~Lett.}}
+% \def\jcp{\ref@jnl{J.~Chem.~Phys.}}      
+% \def\jgr{\ref@jnl{J.~Geophys.~Res.}}    
+% \def\jqsrt{\ref@jnl{J.~Quant.~Spec.~Radiat.~Transf.}}
+% \def\memsai{\ref@jnl{Mem.~Soc.~Astron.~Italiana}}
+% \def\nphysa{\ref@jnl{Nucl.~Phys.~A}}
+% \def\physrep{\ref@jnl{Phys.~Rep.}}
+% \def\physscr{\ref@jnl{Phys.~Scr}}
+% \def\planss{\ref@jnl{Planet.~Space~Sci.}}
+% \def\procspie{\ref@jnl{Proc.~SPIE}}
+\let\astap=\aap
+\let\apjlett=\apjl
+\let\apjsupp=\apjs
+\let\applopt=\ao
+
+% Initialization.
+
+\textwidth 6.0in
+\textheight 9.0in
+\oddsidemargin \z@
+\evensidemargin \z@
+\topmargin 0.5in
+\headheight .1in
+\headsep .2in
+\parindent \z@
+\addtolength{\parskip}{1 ex}
+
+\usepackage[hmargin=20mm,top=28mm,bottom=20mm]{geometry}
+\ps@kpprophead
+\setcounter{secnumdepth}{0}
